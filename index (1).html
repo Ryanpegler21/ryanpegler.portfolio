@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ryan Pegler | Portfolio</title>
+  <style>
+    /* Color Scheme
+       Primary: Deep Navy (#1B263B)
+       Accent: Gold (#FFC857)
+       Background: Light Gray (#EAEAEA)
+       Hover State: Brushed Gold (#D9A52E)
+    */
+
+    /* Base Reset & Typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #555; /* A medium gray for body text */
+      background: #EAEAEA;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      color: #1B263B; /* Primary color for headers */
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1B263B;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #D9A52E; /* Hover color for links */
+    }
+
+    /* Fade-in scroll effect */
+    section {
+      padding: 4rem 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1B263B; /* Primary color for navbar */
+      padding: 1rem 5%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav h1 {
+      font-size: 1.8rem;
+      color: #FFC857; /* Accent color for your name/logo */
+      margin: 0;
+    }
+
+    nav a {
+      color: #FFFFFF; /* White text in navbar */
+      margin: 0 1rem;
+    }
+
+    nav a:hover {
+      color: #FFC857; /* Gold accent on hover */
+    }
+
+    /* Hero Section */
+    #hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 5rem 0;
+    }
+
+    #hero img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 5px solid #1B263B;
+      margin-bottom: 1.5rem;
+    }
+
+    #hero h1 {
+      margin: 0.5rem 0;
+    }
+
+    #hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Skills Section */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .skills div {
+      background: #FFF;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Cards (Experience, Projects, Classes) */
+    .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.card {
+  background: #FFF;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card button {
+  background-color: #1B263B;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  display: block;
+  margin: 1rem auto;
+}
+
+.card button:hover {
+  background-color: #D9A52E;
+  transform: scale(1.05);
+}
+
+
+    /* Tab Menu */
+    .tab-menu {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .tab-button {
+      background: #1B263B; /* Primary color for tab buttons */
+      color: #FFFFFF;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .tab-button:hover,
+    .tab-button.active {
+      background: #D9A52E; /* Hover/Active state */
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Contact Section */
+    #contact {
+      text-align: center;
+    }
+
+    #contact p {
+      margin-bottom: 2rem;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-buttons a {
+      background: #FFC857; /* Accent color for contact buttons */
+      color: #1B263B;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: background 0.3s;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .contact-buttons a:hover {
+      background: #D9A52E; /* Brushed gold on hover */
+    }
+
+    .contact-buttons a img {
+      width: 20px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <h1>Ryan Pegler</h1>
+    <div>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#classes">Classes</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <img src="https://media.licdn.com/dms/image/v2/D5603AQFZin4RQgmXGw/profile-displayphoto-shrink_400_400/B56ZPh.4NCH0Ag-/0/1734663177433?e=1740009600&v=beta&t=cCb46Q0ngdto8Zaj8DcGGg3usblqe-_1lSctWVwhTHQ">
+    <h1>Ryan Pegler</h1>
+    <p>Gies College of Business</p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        I am currently a third year student at the <strong> University of Illinois at Urbana-Champaign </strong> majoring in Finance and Information Systems within the Gies College of Business. My academic journey will take me to Milan, Italy in January, where I will study at <strong>Bocconi University</strong>. I have been involved in many organizations throughout the past couple of years, including founding a social fraternity on campus, taking leadership roles in Illini Blockchain, and honing my financial skills in Investment Portfolio Organization. I combine all of my passions to lead <strong>OpenField</strong>, which I founded and developed to help collegiate athletes of all levels, as well as local businesses and sports programs. I will continue to immerse myself in the business and data analytics world.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Finance</h3>
+          <p>Microsoft Excel, Bloomberg Terminal, S&P 500</p>
+        </div>
+        <div>
+          <h3>Languages</h3>
+          <p>Python, SQL, JavaScript, HTML</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section">
+    <div class="container">
+      <h2>Experience</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Prairie Road Partners Internship</h3>
+          <p>Performed detailed financial analysis on 1,000+ healthcare companies, evaluating performance metrics, industry trends, and acquisition opportunities.</p>
+        </div>
+        <div class="card">
+          <h3>Illini Blockchain</h3>
+          <p>Conducted in-depth research on blockchain technologies and decentralized finance, presenting findings to enhance investment strategies.</p>
+        </div>
+        <div class="card">
+          <h3>HEDGE: Equities, Options, and Alternatives</h3>
+          <p>Analyzed equity markets, using fundamental and technical analysis to deliver actionable recommendations for portfolio optimization.</p>
+        </div>
+        <div class="card">
+          <h3>OpenField</h3>
+          <p>Founded a platform connecting athletes of all levels, local businesses, and sports programs through NIL opportunities, leveraging analytics for ROI tracking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="cards">
+        <!-- Project 1 -->
+        <div class="card">
+          <h3>OpenField Platform</h3>
+          <p>
+            Developed a platform bridging athletes and businesses, and sports programs for NIL opportunities for underrepresented collegiate athletes.
+          </p>
+          <button onclick="window.location.href='https://www.openfieldus.com';">
+            View Website
+          </button>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="card">
+          <h3>NBA "Boom or Bust" Prediction Model</h3>
+          <p>
+            Created a data-driven model to evaluate past NBA prospects' using advanced metrics and used it to identify future scouting opportunities using statistical analysis.
+          </p>
+          <button onclick="window.location.href='https://docs.google.com/spreadsheets/d/14za4NygGWqAsXMnv1IgcFr-GARc-6mp6';">
+            View Project
+          </button>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="card">
+          <h3>StockPicks</h3>
+          <p>
+            Created a user-friendly tool that simplifies investment portfolio management so that people of all knowledge levels can start their investing journey.
+          </p>
+          <button onclick="window.location.href='https://medium.com/@ryanpegler21/stockpicks-simplified-investment-portfolio-management-9e09154b9460';">
+            View Project
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Classes Section -->
+  <section id="classes" class="section">
+    <div class="container">
+      <h2>Classes</h2>
+      <div class="tab-menu">
+        <button class="tab-button active" onclick="openTab(event, 'business')">Business</button>
+        <button class="tab-button" onclick="openTab(event, 'info')">Info Systems</button>
+        <button class="tab-button" onclick="openTab(event, 'other')">Other</button>
+      </div>
+      <div id="business" class="tab-content active">
+        <div class="cards">
+          <div class="card">
+            <h3>FIN 411: Investment Portfolio Management</h3>
+            <p>Analyzed portfolio diversification, asset allocation, and risk-adjusted returns through quantitative models.</p>
+          </div>
+          <div class="card">
+            <h3>FIN 300: Financial Markets</h3>
+            <p>Studied market dynamics, financial instruments, and trading strategies in global capital markets.</p>
+          </div>
+          <div class="card">
+            <h3>FIN 423: Entrepreneurial Finance</h3>
+            <p>Explored financing strategies, valuation methods, and capital structures for startups and small businesses.</p>
+          </div>
+          <div class="card">
+            <h3>FIN 321: Advanced Corporate Finance</h3>
+            <p>Conducted financial analysis, strategic capital budgeting, and decision-making for corporate growth initiatives.</p>
+          </div>
+          <div class="card">
+            <h3>ACCY 201 & 202: Accountancy I & II</h3>
+            <p>Mastered financial accounting principles, reporting standards, and interpreting financial statements.</p>
+          </div>
+        </div>
+      </div>
+      <div id="info" class="tab-content">
+        <div class="cards">
+          <div class="card">
+            <h3>BADM 352: Database Design and Management</h3>
+            <p>Designed relational databases, optimized queries, and managed data integrity using SQL.</p>
+          </div>
+          <div class="card">
+            <h3>BADM 350: IT for Networked Organizations</h3>
+            <p>Explored IT infrastructure, cybersecurity, and systems integration within enterprise networks using SQL.</p>
+          </div>
+          <div class="card">
+            <h3>BADM 310: Management and Organizational Behavior</h3>
+            <p>Developed leadership skills, organizational analysis techniques, and teamwork strategies for efficient management.</p>
+          </div>
+          <div class="card">
+            <h3>CS 105: Computing</h3>
+            <p>Introduced to foundational programming concepts, algorithm development, and problem-solving techniques.</p>
+          </div>
+        </div>
+      </div>
+      <div id="other" class="tab-content">
+        <div class="cards">
+          <div class="card">
+            <h3>Statistics</h3>
+            <p>Applied statistical models to analyze data, test hypotheses, and interpret real-world results.</p>
+          </div>
+          <div class="card">
+            <h3>Macroeconomics & Microeconomics</h3>
+            <p>Explored economic theories, market behavior, and the impact of policy on global and local economies.</p>
+          </div>
+          <div class="card">
+            <h3>Public Speaking</h3>
+            <p>Refined communication skills, delivering compelling presentations tailored to diverse audiences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>If you have any questions, similar interests, or want to connect, please reach out.</p>
+      <div class="contact-buttons">
+        <a href="mailto:ryanpegler21@gmail.com" rel="noopener noreferrer">
+          <img src="https://cdn.pixabay.com/photo/2016/06/13/17/30/mail-1454731_1280.png" alt="Email">
+          Email Me
+        </a>
+        <a href="https://linkedin.com/in/ryanpegler" target="_blank" rel="noopener noreferrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+          LinkedIn
+        </a>
+        <a href="https://www.instagram.com/ryanpegler21/?hl=en" target="_blank" rel="noopener noreferrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+          Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    // Tab switching logic
+    function openTab(evt, tabName) {
+      const tabContents = document.getElementsByClassName('tab-content');
+      const tabButtons = document.getElementsByClassName('tab-button');
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove('active');
+      }
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove('active');
+      }
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    // Fade-in sections on scroll
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
